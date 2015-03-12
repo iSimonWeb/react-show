@@ -1,0 +1,43 @@
+.pagination {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	a {
+		cursor: pointer;
+		display: inline-block;
+		vertical-align: middle;
+		background-color: #fff;
+		position: relative;
+		.size(2rem);
+		border-radius: 2rem;
+		margin-right: 1.6rem;
+		margin-top: 3rem;
+		box-shadow: @light-shadow;
+		transform-origin: center;
+		transform: scale(1);
+		transition: transform .3s ease-out;
+	}
+	a:after {
+		content: "";
+		background-color: @light-blue;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		.size(1rem);
+		border-radius: .5rem;
+		transform-origin: top left;
+		transform: scale(0) translate(-50%, -50%);
+		transition: transform .3s ease-out;
+	}
+	a:first-child {
+		margin-left: 3rem;
+	}
+
+	a.current {
+		transform: scale(1.5);
+	}
+	a.current:after {
+		transform: scale(1) translate(-50%, -50%);
+	}
+}

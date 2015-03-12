@@ -1,0 +1,45 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,300,400);
+@import 'utilities';
+@import 'global';
+@import 'slideshow';
+@import 'pagination';
+@import 'direction-nav';
+@import 'slide';
+@import 'image-animation';
+
+// Colors
+@light-blue: #00aeef;
+@dark-grey: #404040;
+@facebook: #3b5998;
+@instagram: #517fa4;
+@linkedin: #007bb6;
+
+// Shadows
+@light-shadow: 0 2px 3px fade(#000, 20%);
+
+// Easing
+@swift-out: cubic-bezier(.55, 0, .1, 1);
+
+// Variables
+@nav-height: 16rem;
+@page-height: ~"calc(100vh - @{nav-height})";
+@mobile-nav-height: 14rem;
+@mobile-nav-fullheight: @mobile-nav-height + 4.7rem;
+@mobile-page-height: ~"calc(100vh - @{mobile-nav-fullheight})";
+
+// Mediaquery stuff
+@tablet-breakpoint: 1024px;
+@mobile-breakpoint: 420px;
+
+
+@media screen and (min-width: (@mobile-breakpoint + 1)) {
+	.play-pause:after {
+		content: " PLAY";
+	}
+}
+@media screen and (max-width: @mobile-breakpoint) {
+	.play-pause:before {
+		font-size: 5rem !important;
+		line-height: 6.3rem;
+	}
+}

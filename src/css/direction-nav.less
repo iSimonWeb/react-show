@@ -1,0 +1,45 @@
+nav.direction {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	z-index: 10;
+
+	button {
+		cursor: pointer;
+		background: transparent;
+		display: block;
+		position: absolute;
+		border: 0 none;
+		outline: 0 none;
+		color: #fff;
+		font-size: 4rem;
+		font-weight: 100;
+		text-shadow: @light-shadow;
+		transform: scaleY(2) translateY(-50%);
+		transform-origin: top center;
+		transition: transform .1s ease-out, text-shadow .1s ease-out;
+	}
+	button:hover {
+		text-decoration: none;
+	}
+
+	button.left {
+		left: 2rem;
+	}
+	button.right {
+		right: 2rem;
+	}
+
+	button.left:after {
+		content: "<";
+	}
+	button.right:after {
+		content: ">";
+	}
+
+	button:active {
+		text-shadow: 0 5px 10px fade(#000, 60%);
+		transform: scale(1.2, 2.4) translateY(-50%);
+	}
+}

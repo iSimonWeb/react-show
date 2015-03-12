@@ -1,0 +1,14 @@
+{
+  "name": "react-show",
+  "version": "0.0.0",
+  "homepage": "https://github.com/iSimonWeb/react-show",
+  "authors": [
+    "Simone Lazzari <lazzari.web@gmail.com>"
+  ],
+  "description": "A Cool Reactjs Slideshow",
+  "main": "dist/reactshow.js",
+  "license": "MIT",
+  "dependencies": {
+    "react": "~0.13.0"
+  }
+}

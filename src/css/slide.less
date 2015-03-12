@@ -1,0 +1,229 @@
+@keyframes spinner {
+	from {
+		transform: rotate(0.01deg);
+	}
+	to {
+		transform: rotate(359.9deg);
+	}
+}
+
+@keyframes spinner-leaving {
+	from {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	to {
+		opacity: 0;
+		transform: translateY(80vh);
+	}
+}
+
+
+@keyframes slide-entering {
+	from {
+		opacity: 0;
+		transform: scale(1.1) rotate(2deg);
+	}
+
+	to {
+		opacity: 1;
+		transform: scale(1.1) rotate(2deg);
+	}
+}
+
+@keyframes fade-in {
+	to {
+		opacity: 1;
+
+	}
+}
+
+
+@keyframes slide-leaving {
+	to {
+		opacity: 0;
+		transform: scale(1) rotate(0.1deg);
+	}
+}
+
+@keyframes slide-rotate {
+	from {
+		opacity: 1;
+		transform: scale(1.1) rotate(2deg);
+	}
+
+	to {
+		opacity: 1;
+		transform: scale(1) rotate(0.1deg);
+	}
+}
+
+@keyframes slide-caption-entering {
+	from {
+		opacity: 0;
+		transform: translateY(100%);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@keyframes slide-caption-leaving {
+	from {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	to {
+		opacity: 0;
+		transform: translateY(100%);
+	}
+}
+
+.slide {
+	.absolute(0);
+	overflow: hidden;
+
+	.slideshow.error & {
+		display: block;
+
+		button {
+			cursor: pointer;
+			display: block;
+			background-color: @light-blue;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			.size(15rem, 4rem);
+			border: 0;
+			box-shadow: @light-shadow;
+			color: #fff;
+			text-transform: uppercase;
+		}
+	}
+
+	.slideshow.ready &.slide-appear {
+		opacity: 0;
+	}
+	.slideshow.ready &.slide-appear.slide-appear-active {
+		animation: fade-in 3s @swift-out forwards;
+	}
+
+	.slideshow.ready &.slide-enter {
+		opacity: 0;
+	}
+	.slideshow.ready &.slide-enter.slide-enter-active {
+		animation: fade-in 3s @swift-out forwards;
+	}
+	.slideshow.ready &.slide-leave {
+		opacity: 1;
+	}
+	.slideshow.ready &.slide-leave.slide-leave-active {
+		animation: slide-leaving 3s @swift-out forwards;
+	}
+	
+
+	&.video:after {
+		display: none;
+	}
+
+	.play-pause {
+		background: transparent;
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		height: 5rem;
+		text-shadow: @light-shadow;
+		color: #fff;
+		font-weight: 100;
+		text-transform: uppercase;
+		outline: none;
+		z-index: 3;
+		opacity: 1;
+		visibility: visible;
+		transform-origin: top left;
+		transition: transform .1s ease-out, text-shadow .1s ease-out,
+					opacity .2s ease-out, visibility 0s;
+		transform: translate(-50%, -50%);
+	}
+	.play-pause:before {
+		margin-right: 1rem;
+		margin-bottom: .5rem;
+		vertical-align: middle;
+		font-size: 3rem;
+	}
+	.play-pause:active {
+		text-shadow: 0 5px 10px fade(#000, 60%);
+		transform: scale(1.2) translate(-50%, -50%);
+	}
+
+	.video-js {
+		.absolute(0) !important;
+		.size(100%) !important;
+		max-height: 100%;
+	}
+	.short {
+		position: absolute;
+		pointer-events: none;
+		.size(100%) !important;
+		animation: none;
+		z-index: 2;
+	}
+	.short video, video.short {
+		object-fit: cover;
+		object-position: center;
+	}
+	.iphone & video.short, .iphone & .short video {
+		display: none;
+	}
+	.iphone & .vjs-poster {
+		display: block !important;
+		background-size: cover;
+	}
+	.full {
+		display: none;
+		width: 100%;
+	}
+	.full video, video.full {
+		object-fit: contain;
+		object-position: center;
+	}
+
+	figcaption {
+		background: linear-gradient(to top, fade(#000, 70%), fade(#000, 0%));
+		.absolute(auto, 0, 0);
+		height: @nav-height;
+		padding: (@nav-height - 3rem) / 2;
+		font-family: 'LubalinGraph';
+		font-size: 3rem;
+		text-shadow: @light-shadow;
+		animation: slide-caption-entering 1s @swift-out forwards;
+		z-index: 10;
+	}
+
+	.paused& i, .paused& .vjs-poster {
+		animation-play-state: paused;
+	}
+
+	html:not(.iphone) &.full-video {
+		.play-pause {
+			opacity: 0;
+			visibility: hidden;
+			transition: opacity .2s ease-out, visibility 0s linear .2s;
+		}
+
+		.short {
+			display: none;
+			z-index: 1;
+		}
+
+		.full {
+			display: block;
+		}
+
+		figcaption {
+			animation: slide-caption-leaving 1s ease-out forwards;
+		}
+	} 
+}

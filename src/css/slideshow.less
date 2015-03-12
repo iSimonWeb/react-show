@@ -1,0 +1,32 @@
+main, .slideshow {
+	position: relative;
+	.size(100%);
+}
+.slideshow {
+	background-color: @dark-grey;
+	overflow: hidden;
+
+	&:after {
+		content: "\e6c2";
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin: -1.5rem 0 0 -1.5rem;
+		color: #fff;
+		font-family: 'PeIcon7stroke';
+		font-size: 4rem;
+		z-index: 10;
+		animation: spinner-leaving .5s forwards;
+	}
+
+	&.loading:after {
+		animation: spinner 1s linear infinite;
+	}
+
+	ul {
+		.absolute(0);
+		margin: 0;
+		padding: 0;
+	}
+}

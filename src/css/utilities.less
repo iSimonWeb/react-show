@@ -1,0 +1,36 @@
+.size(@size) {
+	width: @size;
+	height: @size;
+}
+.size(@width, @height) {
+	width: @width;
+	height: @height;
+}
+.absolute(@every) {
+	position: absolute;
+	top: @every;
+	right: @every;
+	bottom: @every;
+	left: @every;
+}
+.absolute(@top, @right) {
+	position: absolute;
+	top: @top;
+	right: @right;
+	bottom: @top;
+	left: @right;
+}
+.absolute(@top, @right, @bottom) {
+	position: absolute;
+	top: @top;
+	right: @right;
+	bottom: @bottom;
+	left: @right;
+}
+.absolute(@top, @right, @bottom, @left) {
+	position: absolute;
+	top: @top;
+	right: @right;
+	bottom: @bottom;
+	left: @left;
+}
