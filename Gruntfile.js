@@ -81,8 +81,10 @@ module.exports = function(grunt) {
 			'reactshow': {
 				files: {
 					'<%= config.distDir %>/js/reactshow.js': [
+						'node_modules/video.js/dist/video-js/video.js',
 						'<%= config.sourceDir %>/components/ReactTransitionEvents.jsx',
 						'<%= config.sourceDir %>/atoms/DirectionNav.jsx',
+						'<%= config.sourceDir %>/atoms/VideoJSComponent.jsx',
 						'<%= config.sourceDir %>/atoms/AnimatedImage.jsx',
 						'<%= config.sourceDir %>/components/Slide.jsx',
 						'<%= config.sourceDir %>/layouts/Slideshow.jsx'
@@ -161,10 +163,11 @@ module.exports = function(grunt) {
 
 		copy: {
 			"static-files": {
-				files: [{
+				files: [
+					{
 						expand: true,
 						cwd: '<%= config.sourceDir %>',
-						src: ['fonts/**', 'images/**', 'static/**'],
+						src: ['fonts/**', 'images/**', 'static/**', 'media/**'],
 						dest: '<%= config.distDir %>/'
 					},
 

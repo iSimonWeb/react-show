@@ -1,5 +1,3 @@
-//var React = require('react');
-//var ReactCSSTransitionGroup = require('react/lib/ReactCSSTransitionGroup.js');
 var NO_EVENT_TIMEOUT = 15000;
 
 var ImageComponent = React.createClass({
@@ -51,6 +49,13 @@ var ImageComponent = React.createClass({
 });
 
 var AnimatedImage = React.createClass({
+	componentWillMount: function() {
+		// Preload image
+		this.img = new Image();
+		this.img.onload = this.props.onLoad;
+		this.img.onerror = this.props.onError;
+		this.img.src = this.props.src;
+	},
 
 	render: function() {
 		var image = (this.props.loaded ? <ImageComponent src={this.props.src} onEnd={this.props.onEnd} /> : []);
@@ -63,5 +68,3 @@ var AnimatedImage = React.createClass({
 	}
 
 });
-
-//module.exports = AnimatedImage;

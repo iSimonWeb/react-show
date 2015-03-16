@@ -1,80 +1,68 @@
-//var React = require('react');
-
-//var AnimatedImage = require('../atoms/AnimatedImage.jsx');
-
-var ReactTransitionGroup = React.addons.TransitionGroup;
-
-
 var Slide = React.createClass({
-	getInitialState: function() {
-		return {
-			content: {},
-			timeout: 10000
-		};
-	},
-
 	getDefaultProps: function() {
 		return {
 			videoPreload: 'auto'
 		};
 	},
 
-	componentDidMount: function() {
-		this.setState({
-			timer: setTimeout(this.onError, this.state.timeout)
-		});
-
-		this.setContent();
+	componentWillMount: function() {
+		var self = this;
+		this.timer = setTimeout(
+			self.props.onError,
+			self.props.loadTimeout
+		);
 	},
 
 	onLoad: function() {
-		clearTimeout(this.state.timer);
-		this.setState({
-			loaded: true,
-			timer: null
-		});
+		clearTimeout(this.timer);
+		this.timer = null;
 
 		this.props.onLoad();
-	},
-
-	onError: function() {
-		this.setState({
-			error: true
-		});
-
-		this.props.onError();
 	},
 
 	reload: function() {
 		this.props.reload();
 	},
 
-	setContent: function() {
-		var content, isVideo;
+	getContent: function() {
+		if (this.props.error)
+			return <button key="error" type="button" className="retry" onClick={this.reload}>Try again</button>;
+
+		//if (this.props.src.search(/$\.[mp4|ogv]/i) != -1)
+		if (typeof this.props.src !== "string")
+			return (
+				<VideoJSComponent
+					key="videojs"
+					src={this.props.src}
+					videoPreload={this.props.videoPreload}
+					onLoad={this.onLoad}
+					onError={this.props.onError}
+					onEnd={this.props.onEnd}
+					playPause={this.props.playPause}
+				/>
+			);
 
 		if (this.props.src.search(/\.(png|jpg|jpeg|bmp)$/i) != -1) {
-			// Preload image
-			var img = new Image();
-			img.onload = this.onLoad;
-			img.onerror = this.onError;
-			img.src = this.props.src;
+			return (
+				<AnimatedImage
+					key="animatedimage"
+					src={this.props.src}
+					animated={this.props.animated}
+					loaded={this.props.loaded}
+					onLoad={this.onLoad}
+					onError={this.props.onError}
+					onEnd={this.props.onEnd}
+				/>
+			);
 		}
-		/*else if (this.props.src.search(/$\.[mp4|ogv]/i) != -1) {
-				content = <VideoJSComponent src={this.props.src} videoPreload={this.props.videoPreload} onEnd={this.props.onReady} />;
-			}*/
 	},
 
 	render: function() {
 		return (
 			<li className="slide">
-				{(this.state.error
-					? <button type="button" className="error timoout" onClick={this.reload}>Try again</button>
-					: <AnimatedImage src={this.props.src} animated={this.props.animated} loaded={this.props.loaded} onEnd={this.props.onEnd} />
-				)}
+				{this.getContent()}
 			</li>
 		);
 	}
 
 });
-
-//module.exports = Slide;

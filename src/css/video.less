@@ -1,0 +1,57 @@
+.slide {
+	.preview video {
+		object-fit: cover;
+		object-position: center;
+	}
+	.video-js {
+		.absolute(0) !important;
+		.size(100%) !important;
+		max-height: 100%;
+	}
+
+	.iphone & .preview video {
+		display: none;
+	}
+	.iphone & .vjs-poster {
+		display: block !important;
+		background-size: cover;
+	}
+
+	.full video {
+		object-fit: contain;
+		object-position: center;
+	}
+
+	button.play-pause {
+		cursor: pointer;
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		.size(10rem);
+		border: 0 none;
+		outline: 0 none;
+		opacity: 1;
+		visibility: visible;
+		transform-origin: top left;
+		transition: transform .1s ease-out, opacity .2s ease-out, visibility 0s;
+	}
+	.preview, .full.paused {
+		& ~ button.play-pause {
+			background: url('../images/play.svg');
+			transform: translate(-50%, -50%);
+		}
+		& ~ button.play-pause:active {
+			transform: scale(1.1) translate(-50%, -50%);
+		}
+	}
+	.full.playing {
+		& ~ button.play-pause {
+			background: url('../images/pause.svg');
+			transform: scale(.7) translate(-50%, -50%);
+		}
+		& ~ button.play-pause:active {
+			transform: scale(.6) translate(-50%, -50%);
+		}
+	}
+}

@@ -1,11 +1,13 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:100,300,400);
-@import 'utilities';
-@import 'global';
-@import 'slideshow';
-@import 'pagination';
-@import 'direction-nav';
-@import 'slide';
-@import 'image-animation';
+@import "node_modules/video.js/dist/video-js/video-js.less";
+@import "utilities";
+@import "global";
+@import "slideshow";
+@import "pagination";
+@import "direction-nav";
+@import "slide";
+@import "image";
+@import "video";
 
 // Colors
 @light-blue: #00aeef;
@@ -30,16 +32,3 @@
 // Mediaquery stuff
 @tablet-breakpoint: 1024px;
 @mobile-breakpoint: 420px;
-
-
-@media screen and (min-width: (@mobile-breakpoint + 1)) {
-	.play-pause:after {
-		content: " PLAY";
-	}
-}
-@media screen and (max-width: @mobile-breakpoint) {
-	.play-pause:before {
-		font-size: 5rem !important;
-		line-height: 6.3rem;
-	}
-}
